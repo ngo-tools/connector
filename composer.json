@@ -33,8 +33,7 @@
     },
     "autoload": {
         "psr-4": {
-            "NgoTools\\Connector\\": "src/",
-            "NgoTools\\Connector\\Database\\Factories\\": "database/factories/"
+            "NgoTools\\Connector\\": "src/"
         },
         "files": [
             "src/Support/helpers.php"
