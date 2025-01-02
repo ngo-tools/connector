@@ -1,6 +1,6 @@
 <?php
 
-use NgoTools\Connector\Ngo;
+use NgoTools\Connector\Support\Ngo;
 
 if (! function_exists('ngo')) {
     function ngo() : Ngo

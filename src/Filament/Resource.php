@@ -10,15 +10,16 @@ abstract class Resource extends \Filament\Resources\Resource
 {
     public final static function canAccess(): bool
     {
-        $marketplaceAppModel = config('connector.marketplace-app-model');
-
-        $app = $marketplaceAppModel::byNamespace(self::getAppNamespace());
-        dd($app);
-        if(!$app->isActivated()) {
+        if(!ngo()->app(self::getAppNamespace())->isActivated()) {
             return false;
         }
 
         return static::hasAccess();
+    }
+
+    public final static function getNavigationGroup(): ?string
+    {
+        return __('donations.donations.navigation-group');
     }
 
     public static function hasAccess(): bool

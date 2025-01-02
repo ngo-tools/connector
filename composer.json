@@ -35,7 +35,10 @@
         "psr-4": {
             "NgoTools\\Connector\\": "src/",
             "NgoTools\\Connector\\Database\\Factories\\": "database/factories/"
-        }
+        },
+        "files": [
+            "app/Support/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
