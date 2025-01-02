@@ -1,6 +1,5 @@
 <?php
 
-// config for NgoTools/Connector
 return [
-
+    'marketplace-app-model' => env('MARKETPLACE_APP_MODEL', )
 ];
