@@ -13,4 +13,9 @@ class MarketplaceApp
     {
         return true;
     }
+
+    public function getNavigationGroup()
+    {
+        return null;
+    }
 }

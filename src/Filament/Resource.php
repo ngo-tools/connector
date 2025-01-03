@@ -19,7 +19,8 @@ abstract class Resource extends \Filament\Resources\Resource
 
     public final static function getNavigationGroup(): ?string
     {
-        return __('donations.donations.navigation-group');
+        return ngo()->app(self::getAppNamespace())
+            ->getNavigationGroup();
     }
 
     public static function hasAccess(): bool
