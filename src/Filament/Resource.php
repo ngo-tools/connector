@@ -53,6 +53,6 @@ abstract class Resource extends \Filament\Resources\Resource
 
     public static function getTenantRelationship(Model $tenant): Relation
     {
-        return $tenant->hasMany(self::$model);
+        return $tenant->hasMany(static::$model);
     }
 }
