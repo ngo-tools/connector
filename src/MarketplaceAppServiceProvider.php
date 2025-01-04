@@ -5,23 +5,17 @@ namespace NgoTools\Connector;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
-use Illuminate\Filesystem\Filesystem;
-use NgoTools\TourManager\Testing\TestsTourManager;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Livewire\Livewire;
+use NgoTools\Connector\Livewire\Segment;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use NgoTools\Connector\Commands\ConnectorCommand;
-use Filament\Support\Assets\AlpineComponent;
-use Filament\Support\Assets\Css;
-use Filament\Support\Assets\Js;
-use Livewire\Features\SupportTesting\Testable;
+use NgoTools\Connector\Facades\Connector;
 
 class MarketplaceAppServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'tour-manager';
-
-    public static string $viewNamespace = 'tour-manager';
-
     public function configurePackage(Package $package): void
     {
         /*
@@ -29,7 +23,7 @@ class MarketplaceAppServiceProvider extends PackageServiceProvider
          *
          * More info: https://github.com/spatie/laravel-package-tools
          */
-        $package->name(static::$name)
+        $package->name(static::$key)
             ->hasCommands($this->getCommands())
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
@@ -47,7 +41,7 @@ class MarketplaceAppServiceProvider extends PackageServiceProvider
         }
 
         if (file_exists($package->basePath('/../resources/views'))) {
-            $package->hasViews(static::$viewNamespace);
+            $package->hasViews(static::$key);
         }
     }
 
@@ -69,22 +63,12 @@ class MarketplaceAppServiceProvider extends PackageServiceProvider
         // Icon Registration
         FilamentIcon::register($this->getIcons());
 
-        // Handle Stubs
-        if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
-                $this->publishes([
-                    $file->getRealPath() => base_path("stubs/tour-manager/{$file->getFilename()}"),
-                ], 'tour-manager-stubs');
-            }
-        }
-
-        // Testing
-        Testable::mixin(new TestsTourManager);
+        $this->registerLivewireComponents();
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return 'ngo-tools/tour-manager';
+        return Connector::namespaceToKey((new \ReflectionClass($this))->getNamespaceName(), '/');
     }
 
     /**
@@ -104,9 +88,7 @@ class MarketplaceAppServiceProvider extends PackageServiceProvider
      */
     protected function getCommands(): array
     {
-        return [
-            // TourManagerCommand::class,
-        ];
+        return [];
     }
 
     /**
@@ -133,12 +115,40 @@ class MarketplaceAppServiceProvider extends PackageServiceProvider
         return [];
     }
 
+    protected function registerLivewireComponents()
+    {
+        foreach(File::allFiles($this->package->basePath('Segments')) as $file) {
+            [$category, $segment] = explode('/', Str::of($file->getPathname())->after('Segments/')->beforeLast('.php'));
+            $segmentClassName = (new \ReflectionClass($this))->getNamespaceName() . '\\Segments\\' . $category . '\\' . $segment;
+
+            if(is_subclass_of($segmentClassName, Segment::class)) {
+                $key = Connector::namespaceToKey($segmentClassName);
+                Livewire::component($key, $segmentClassName);
+            }
+        }
+    }
+
+    public function getResources()
+    {
+        return $this->getFilamentStuff('Resources');
+    }
+
+    public function getPages()
+    {
+        return $this->getFilamentStuff('Pages');
+    }
+
+    private function getFilamentStuff($type)
+    {
+        $namespace = (new \ReflectionClass($this))->getNamespaceName();
+
+        return collect(File::files($this->package->basePath($type)))
+            ->map(fn($file) => $namespace . '\\' . $type . '\\' . Str::before($file->getFilename(), '.php'));
+    }
+
     public function getMigrationsPath()
     {
         $path = 'database/migrations';
-        $reflector = new \ReflectionClass($this);
-
-        return dirname(__DIR__);
 
         return $this->package->basePath("/../{$path}");
     }
