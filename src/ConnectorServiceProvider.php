@@ -2,9 +2,12 @@
 
 namespace NgoTools\Connector;
 
+use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use NgoTools\Connector\Commands\ConnectorCommand;
+use Whitecube\LaravelCookieConsent\CookiesManager;
+use Whitecube\LaravelCookieConsent\Facades\Cookies;
 
 class ConnectorServiceProvider extends PackageServiceProvider
 {
@@ -19,7 +22,6 @@ class ConnectorServiceProvider extends PackageServiceProvider
             ->name('connector')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_connector_table')
-            ->hasCommand(ConnectorCommand::class);
+            ->hasTranslations();
     }
 }
