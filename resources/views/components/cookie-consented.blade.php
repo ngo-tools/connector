@@ -10,5 +10,4 @@
         {{ __('connector::cookies.messages.manage-cookies-label') }}
         @cookieconsentbutton(action: 'reset', label: __('connector::cookies.messages.manage-cookies'))
     </div>
-
 @endif
