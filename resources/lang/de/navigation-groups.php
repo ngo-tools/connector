@@ -22,4 +22,10 @@ return [
     'Projects' => [
         'label' => 'Projekte',
     ],
+    'Fundraising' => [
+        'label' => 'Fundraising',
+    ],
+    'Miscellaneous' => [
+        'label' => 'Verschiedenes',
+    ],
 ];

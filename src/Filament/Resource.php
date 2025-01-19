@@ -27,14 +27,20 @@ abstract class Resource extends \Filament\Resources\Resource
             ->getNavigationGroup();
     }
 
-    public static function hasAccess(): bool
+    public static function getNavigationSort(): ?int
     {
-        return parent::canAccess();
+        return ngo()->app(self::getAppNamespace())
+            ->getNavigationSort();
     }
 
     public final static function getNavigationIcon(): string|Htmlable|null
     {
         return '';
+    }
+
+    public static function hasAccess(): bool
+    {
+        return parent::canAccess();
     }
 
     public final static function getAppNamespace()

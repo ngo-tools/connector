@@ -18,4 +18,9 @@ class MarketplaceApp
     {
         return null;
     }
+
+    public function getNavigationSort()
+    {
+        return null;
+    }
 }
