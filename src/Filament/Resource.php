@@ -14,7 +14,9 @@ abstract class Resource extends \Filament\Resources\Resource
 {
     public final static function canAccess(): bool
     {
-        if(!ngo()->app(self::getAppNamespace())->isActivated()) {
+        $app = empty(self::getApp());
+
+        if(empty($app) || !$app->isActivated()) {
             return false;
         }
 
@@ -23,13 +25,13 @@ abstract class Resource extends \Filament\Resources\Resource
 
     public final static function getNavigationGroup(): ?string
     {
-        return ngo()->app(self::getAppNamespace())
+        return self::getApp()
             ->getNavigationGroup();
     }
 
     public static function getNavigationSort(): ?int
     {
-        return ngo()->app(self::getAppNamespace())
+        return self::getApp()
             ->getNavigationSort();
     }
 
@@ -41,6 +43,11 @@ abstract class Resource extends \Filament\Resources\Resource
     public static function hasAccess(): bool
     {
         return parent::canAccess();
+    }
+
+    public static function getApp()
+    {
+        return ngo()->app(self::getAppNamespace());
     }
 
     public final static function getAppNamespace()
