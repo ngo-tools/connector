@@ -14,7 +14,7 @@ abstract class Resource extends \Filament\Resources\Resource
 {
     public final static function canAccess(): bool
     {
-        $app = empty(self::getApp());
+        $app = self::getApp();
 
         if(empty($app) || !$app->isActivated()) {
             return false;
