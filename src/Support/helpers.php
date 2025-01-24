@@ -14,8 +14,12 @@ if (! function_exists('ngo')) {
 if (! function_exists('tenantRoute')) {
     function tenantRoute($name, $parameters = [], $absolute = true)
     {
-        $parameters = Arr::wrap($parameters);
-        array_unshift($parameters, Filament::getTenant());
+        // Helper for the case that we only have one parameter - we assume "record"
+        if(!is_array($parameters)) {
+            $parameters = ['record' => $parameters];
+        }
+
+        $parameters['tenant'] = Filament::getTenant() ?? 'app';
         return route($name, $parameters, $absolute);
     }
 }
