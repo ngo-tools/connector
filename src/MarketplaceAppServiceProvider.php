@@ -138,6 +138,11 @@ class MarketplaceAppServiceProvider extends PackageServiceProvider
         return $this->getFilamentStuff('Pages');
     }
 
+    public function onActivation()
+    {
+
+    }
+
     private function getFilamentStuff($type)
     {
         $namespace = (new \ReflectionClass($this))->getNamespaceName();
