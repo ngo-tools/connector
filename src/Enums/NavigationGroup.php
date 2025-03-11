@@ -14,6 +14,7 @@ enum NavigationGroup
     case Knowledge;
     case Fundraising;
     case Miscellaneous;
+    case Events;
 
     public function translatedString()
     {

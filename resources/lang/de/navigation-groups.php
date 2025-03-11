@@ -25,6 +25,9 @@ return [
     'Fundraising' => [
         'label' => 'Fundraising',
     ],
+    'Events' => [
+        'label' => 'Events',
+    ],
     'Miscellaneous' => [
         'label' => 'Verschiedenes',
     ],
