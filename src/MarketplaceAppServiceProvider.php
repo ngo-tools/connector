@@ -143,6 +143,11 @@ class MarketplaceAppServiceProvider extends PackageServiceProvider
 
     }
 
+    public function getTasksToAddOnActivation() : array
+    {
+        return [];
+    }
+
     private function getFilamentStuff($type)
     {
         $namespace = (new \ReflectionClass($this))->getNamespaceName();
