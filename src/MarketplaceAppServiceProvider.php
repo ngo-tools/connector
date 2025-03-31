@@ -143,7 +143,7 @@ class MarketplaceAppServiceProvider extends PackageServiceProvider
 
     }
 
-    public function getTasksToAddOnActivation() : array
+    public function getTasksToAddOnActivation($appKey) : array
     {
         return [];
     }
