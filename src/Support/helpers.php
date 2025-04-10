@@ -33,14 +33,14 @@ if (! function_exists('canAccessRoute')) {
     {
         $controller = Route::getRoutes()->getByName($name)->getController();
 
-        if($controller::canAccess()) {
-            return true;
+        if(!$controller::canAccess()) {
+            return false;
         }
 
-        if(method_exists($controller, 'getResource') && filled($controller::getResource()) && $controller::getResource()::canAccess()) {
-            return true;
+        if(method_exists($controller, 'getResource') && filled($controller::getResource()) && !$controller::getResource()::canAccess()) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
