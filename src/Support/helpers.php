@@ -14,16 +14,8 @@ if (! function_exists('ngo')) {
 if (! function_exists('tenantRoute')) {
     function tenantRoute($name, $parameters = [], $absolute = true, $skipAuthenticationCheck = false)
     {
-        if(!$skipAuthenticationCheck) {
-            $controller = Route::getRoutes()->getByName($name)->getController();
-
-            if(!$controller::canAccess()) {
-                return null;
-            }
-
-            if(filled($controller::getResource()) && !$controller::getResource()::canAccess()) {
-                return null;
-            }
+        if(!$skipAuthenticationCheck && !canAccessRoute($name)) {
+            return null;
         }
 
         // Helper for the case that we only have one parameter - we assume "record"
@@ -33,5 +25,22 @@ if (! function_exists('tenantRoute')) {
 
         $parameters['tenant'] = Filament::getTenant() ?? 'app';
         return route($name, $parameters, $absolute);
+    }
+}
+
+if (! function_exists('canAccessRoute')) {
+    function canAccessRoute($name)
+    {
+        $controller = Route::getRoutes()->getByName($name)->getController();
+
+        if($controller::canAccess()) {
+            return true;
+        }
+
+        if(method_exists($controller, 'getResource') && filled($controller::getResource()) && $controller::getResource()::canAccess()) {
+            return true;
+        }
+
+        return false;
     }
 }
