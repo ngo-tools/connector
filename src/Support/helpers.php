@@ -20,7 +20,7 @@ if (! function_exists('tenantRoute')) {
      * into
      *     ->url(fn($record) => tenantRoute('...', $record->contact))
      */
-    function tenantRoute($name, $parameters = null, $absolute = true, $skipAuthenticationCheck = false): ?string
+    function tenantRoute($name, $parameters = [], $absolute = true, $skipAuthenticationCheck = false): ?string
     {
         if ($parameters === null) {
             return null;
