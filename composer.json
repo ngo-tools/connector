@@ -37,7 +37,7 @@
             "NgoTools\\Connector\\": "src/"
         },
         "files": [
-            "/src/Support/helpers.php"
+            "src/Support/helpers.php"
         ]
     },
     "autoload-dev": {
