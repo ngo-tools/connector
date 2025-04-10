@@ -12,7 +12,7 @@ if (! function_exists('ngo')) {
 }
 
 if (! function_exists('tenantRoute')) {
-    function tenantRoute($name, $parameters = [], $absolute = true, $skipAuthenticationCheck = false)
+    function tenantRoute($name, $parameters = [], $absolute = true, $skipAuthenticationCheck = false): ?string
     {
         if(!$skipAuthenticationCheck && !canAccessRoute($name)) {
             return null;
@@ -29,7 +29,7 @@ if (! function_exists('tenantRoute')) {
 }
 
 if (! function_exists('canAccessRoute')) {
-    function canAccessRoute($name)
+    function canAccessRoute($name): bool
     {
         $controller = Route::getRoutes()->getByName($name)->getController();
 
