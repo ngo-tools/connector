@@ -6,6 +6,7 @@ enum Cookie
 {
     case KomootEmbedding;
     case ReliveEmbedding;
+    case OpenStreetMap;
 
     public function getName()
     {

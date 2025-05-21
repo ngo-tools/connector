@@ -15,4 +15,8 @@ return [
         'name' => 'Relive',
         'description' => 'Ermöglicht das Anzeigen von Inhalten von Relive. Diese Inhalte werden von Relive geladen. Dabei können Cookies gesetzt werden, auf die wir keinen Einfluss haben. Bitte stimmen Sie zu, um die Inhalte zu sehen.'
     ],
+    \NgoTools\Connector\Enums\Cookie::OpenStreetMap->name => [
+        'name' => 'OpenStreetMap',
+        'description' => 'Ermöglicht das Anzeigen von Inhalten von OpenStreetMap. Diese Inhalte werden von OpenStreetMap geladen. Dabei können Cookies gesetzt werden, auf die wir keinen Einfluss haben. Bitte stimmen Sie zu, um die Inhalte zu sehen.'
+    ],
 ];
