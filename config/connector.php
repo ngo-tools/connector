@@ -6,6 +6,7 @@ return [
         'duration' => [
             \NgoTools\Connector\Enums\Cookie::KomootEmbedding->name => 168 * 24 * 60, // 6 months
             \NgoTools\Connector\Enums\Cookie::ReliveEmbedding->name => 168 * 24 * 60, // 6 months
+            \NgoTools\Connector\Enums\Cookie::OpenStreetMap->name => 168 * 24 * 60, // 6 months
         ]
     ]
 ];
