@@ -56,10 +56,3 @@ if (! function_exists('canAccessRoute')) {
         return true;
     }
 }
-
-if (! function_exists('tenant')) {
-    function tenant(): \NgoTools\Connector\Models\Tenant
-    {
-        return \NgoTools\Connector\Models\Tenant::current();
-    }
-}

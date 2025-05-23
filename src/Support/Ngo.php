@@ -10,4 +10,9 @@ class Ngo
 
         return $marketplaceAppModel::byNamespace($namespace);
     }
+
+    public function tenant()
+    {
+        return \App\Models\Tenant::current();
+    }
 }
