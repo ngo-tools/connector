@@ -28,6 +28,9 @@ return [
     'Events' => [
         'label' => 'Events',
     ],
+    'Resources' => [
+        'label' => 'Resources',
+    ],
     'Miscellaneous' => [
         'label' => 'Miscellaneous',
     ],
