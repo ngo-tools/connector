@@ -2,20 +2,20 @@
 
 namespace NgoTools\Connector\Enums;
 
-enum NavigationGroup
+enum NavigationGroup: string
 {
-    case Communication;
-    case Donations;
-    case Finance;
-    case General;
-    case Projects;
-    case Contacts;
-    case Website;
-    case Knowledge;
-    case Fundraising;
-    case Miscellaneous;
-    case Events;
-    case Resources;
+    case Communication = 'Communication';
+    case Donations = 'Donations';
+    case Finance = 'Finance';
+    case General = 'General';
+    case Projects = 'Projects';
+    case Contacts = 'Contacts';
+    case Website = 'Website';
+    case Knowledge = 'Knowledge';
+    case Fundraising = 'Fundraising';
+    case Miscellaneous = 'Miscellaneous';
+    case Events = 'Events';
+    case Resources = 'Resources';
 
     public function translatedString()
     {
